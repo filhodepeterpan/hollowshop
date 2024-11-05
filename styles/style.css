@@ -1,0 +1,108 @@
+@import url(root.css);
+
+*{
+    margin: 0;
+    padding: 0;
+    cursor: url(../assets/cursors/hollow-knight.png), auto;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    font-family: var(--fonte-hollow-knight);
+    background-image: linear-gradient(rgb(39, 47, 84), black);
+    color: white;
+}
+ 
+.tela{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+}
+
+#tela-login-titulo{
+    margin: 0 0 1.5rem 0;
+    text-align: center;
+}
+
+.tela-login-inputs{
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 1rem 0;
+}
+
+#email, #senha{
+    padding: 0.5rem 0.3rem;
+    margin: 0 0 0.5rem 0;
+    outline: none;
+}
+
+.tela-login-botoes{
+    display: flex;
+    justify-content: end;
+    gap: 0.5rem;
+}
+
+#entrar, #sair{
+    font-family: var(--fonte-hollow-knight);
+    padding: 0.5rem;
+    background-color: var(--cor-destaque);
+    color: white;
+    outline: none;
+    border: 1px solid white;
+}
+
+#entrar:hover, #sair:hover{
+    opacity: 80%;
+}
+
+.cabecalho{
+    background-color: black;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+    margin: 0 0 0 1rem;
+}
+
+nav{
+    margin: 0 2rem 0 0;
+}
+
+#cadastro, #consulta{
+    margin: 0 0.5rem;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-family: var(--fonte-hollow-knight);
+}
+
+#cadastro option, #consulta option{
+    margin: 1rem 0;
+    background-color: black;
+}
+
+#deslogar{
+    text-decoration: none;
+    margin: 0 0 0 1rem;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 0.85rem;
+}
+
+#deslogar:hover{
+    border-bottom: 1px solid white;
+}
+
+.menu-conteudo{
+    margin: 8rem 5rem 0 5rem;
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}

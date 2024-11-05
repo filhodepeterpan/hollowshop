@@ -1,0 +1,9 @@
+:root{
+    --fonte-hollow-knight: "Trajan Pro Regular";
+    --cor-destaque: rgb(39, 47, 84);
+}
+
+@font-face {
+    font-family: "Trajan Pro Regular";
+    src: url(../assets/fonts/trajan-pro-regular.ttf);
+}
