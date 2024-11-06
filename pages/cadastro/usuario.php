@@ -16,7 +16,7 @@
         <nav>
 
             <select name="cadastro" id="cadastro">
-                <option selected value="">Cadastro</option>
+                <option value="">Cadastro</option>
                 <option value="cliente.php">Cliente</option>
                 <option value="funcionario.php">Funcionário</option>
                 <option value="fornecedor.php">Fornecedor</option>
@@ -38,13 +38,71 @@
         </nav>
     </header>
 
+    <div class="formulario">
+        
+        <form id="formulario-cadastro" action="#" method="POST">
+
+            <h1 id="formulario-titulo">Cadastro de Usuário</h1>
+
+            <label>Nome de usuário:</label>
+            <br>
+            <input type="text" name="usuario" id="nome-de-usuario">
+            <br>
+
+            <label>Senha:</label>
+            <br>
+            <input type="password" name="senha" id="senha-do-usuario">
+            <br>
+            
+            <label>Confirmar Senha:</label>
+            <br>
+            <input type="password" name="confirmacao-senha" id="confirmacao-senha">
+            <br>
+
+            <label>Funcionário:</label>
+            <br>
+            <input type="text" name="funcionario" id="funcionario">
+            <br>
+
+            <div class="formulario-botoes">
+                <button type="submit" id="botaoCadastro">Cadastrar</button>
+                <button type="button" id="botaoLimpar" onclick="limpaFormulario()">Limpar</button>
+            </div>
+
+        </form>
+    </div>
+
     <script src="../../scripts/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     
 </body>
 </html>
 
 <?php
-    if($_POST){
-      
+if ($_POST) {
+    $dadosCadastro = [
+        "Usuário:" => $_POST['usuario'],
+        "Nome do Funcionário" => $_POST['funcionario']
+    ];
+    
+    $senha = $_POST['senha'];
+    $confirmacaoSenha = $_POST['confirmacao-senha'];
+
+    if($senha == $confirmacaoSenha){
+        echo "<div class='resultado'>";
+        
+        foreach ($dadosCadastro as $tipoDeDado => $dado){
+            echo "<p><strong>$tipoDeDado: </strong> $dado</p>";
+        }
+
+        echo "</div>";
+        echo "<br><br><br>";
     }
+    else{
+        echo "<div class='resultado'>";
+        echo "As senhas são incompatíveis.";
+        echo "</div>";
+        echo "<br><br><br>";
+    }
+}
 ?>
