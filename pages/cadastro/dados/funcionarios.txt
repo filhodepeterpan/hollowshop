@@ -1,5 +1,0 @@
-Funcionário: Anônimo da Silva, 90648591085, 48069257, 69073390, AM, Manaus, São Lázaro, Beco Trinta e Um de Março, 0, 13999999999, anonimo_da_silva@usuario.com, 2024-11-08, 
-
-Funcionário: Douglas Soares Santos, 99403801000, 11111111, 11718040, SP, Praia Grande, Anhanguera, Rua Filomena Mustach, 25, 13991191719, douglassoares.cinema@gmail.com, 2024-11-09, 
-
-    
