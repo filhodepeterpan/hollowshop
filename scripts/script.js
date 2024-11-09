@@ -163,6 +163,7 @@ function validaCNPJ() {
     if (cnpjLimpo.length !== 14 ||
         /^(\d)\1+$/.test(cnpjLimpo)) {
         consultaDeCNPJ.innerHTML = "CNPJ inválido!";
+        cpf = "";
         return false;
     }
 
@@ -181,6 +182,7 @@ function validaCNPJ() {
     let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
     if (resultado != digitos.charAt(0)) {
         consultaDeCNPJ.innerHTML = "CNPJ inválido!";
+        cpf = "";
         return false;
     }
 
@@ -197,6 +199,7 @@ function validaCNPJ() {
     resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
     if (resultado != digitos.charAt(1)) {
         consultaDeCNPJ.innerHTML = "CNPJ inválido!";
+        cpf = "";
         return false;
     }
 

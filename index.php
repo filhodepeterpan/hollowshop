@@ -19,12 +19,11 @@
             <div class="tela-login-inputs">
                 <label>Email</label>
                 <input type="email" name="email" id="email">
-                <label>Senha:</label>
+                <label>Senha</label>
                 <input type="password" name="senha" id="senha">
             </div>
             
             <div class="tela-login-botoes">
-                <button name="sair" id="sair">Sair</button>
                 <button type="submit" name="entrar" id="entrar">Entrar</button>
             </div>
 

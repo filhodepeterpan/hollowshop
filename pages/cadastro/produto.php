@@ -46,17 +46,17 @@
 
             <label>Código do Produto:</label>
             <br>
-            <input type="text" name="codigo" id="codigo-produto">
+            <input required type="text" name="codigo" id="codigo-produto">
             <br>
 
             <label>Nome do Produto:</label>
             <br>
-            <input type="text" name="nome" id="nome-produto" maxlength="150">
+            <input required type="text" name="nome" id="nome-produto" maxlength="150">
             <br>
             
             <label>Categoria:</label>
             <br>
-            <input type="text" name="cateogria" id="categoria-produto" maxlength="100">
+            <input required type="text" name="cateogria" id="categoria-produto" maxlength="100">
             <br>
 
             <label>Descrição:</label>
@@ -66,27 +66,27 @@
 
             <label>Preço de Compra:</label>
             <br>
-            <input type="text" pattern="[0-9.,R$ ]+" name="preco" id="precoCompra">
+            <input required type="text" pattern="[0-9.,R$ ]+" name="preco" id="precoCompra">
             <br> 
 
             <label>Quantidade:</label>
             <br>
-            <input type="number" name="quantidade" id="quantidadeProduto">
+            <input required type="number" name="quantidade" id="quantidadeProduto">
             <br>
 
             <label>Data de Compra:</label>
             <br>
-            <input type="date" name="data-compra" id="data-compra">
+            <input required type="date" name="data-compra" id="data-compra">
             <br>
 
             <label>Data de Validade:</label>
             <br>
-            <input type="date" name="data-validade" id="data-validade">
+            <input required type="date" name="data-validade" id="data-validade">
             <br>
 
             <label>Fornecedor:</label>
             <br>
-            <input type="text" name="fornecedor" id="fornecedor" maxlength="100">
+            <input required type="text" name="fornecedor" id="fornecedor" maxlength="100">
             <br>
 
             <div class="formulario-botoes">
@@ -125,5 +125,24 @@ if ($_POST) {
 
     echo "</div>";
     echo "<br><br><br>";
+
+    $conteudo = "Produto: ";
+
+    foreach ($dadosCadastro as $tipoDeDado => $dado){
+        $conteudo .= $dado.", ";
+    }
+
+    $conteudo .= "
+
+    ";
+
+    $caminho = "dados/produto.txt";
+
+    if (file_put_contents($caminho, $conteudo, FILE_APPEND)){
+        echo "<script>alert('Dados cadastrados com sucesso!');</script>";
+    }
+    else{
+        echo "<script>alert('Erro ao cadastrar.');</script>";
+    }
 }
 ?>

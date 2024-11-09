@@ -46,22 +46,22 @@
 
             <label>Nome de usuário:</label>
             <br>
-            <input type="text" name="usuario" id="nome-de-usuario">
+            <input required type="text" name="usuario" id="nome-de-usuario">
             <br>
 
             <label>Senha:</label>
             <br>
-            <input type="password" name="senha" id="senha-do-usuario">
+            <input required type="password" name="senha" id="senha-do-usuario">
             <br>
             
             <label>Confirmar Senha:</label>
             <br>
-            <input type="password" name="confirmacao-senha" id="confirmacao-senha">
+            <input required type="password" name="confirmacao-senha" id="confirmacao-senha">
             <br>
 
             <label>Funcionário:</label>
             <br>
-            <input type="text" name="funcionario" id="funcionario">
+            <input required type="text" name="funcionario" id="funcionario">
             <br>
 
             <div class="formulario-botoes">
@@ -82,6 +82,7 @@
 if ($_POST) {
     $dadosCadastro = [
         "Usuário:" => $_POST['usuario'],
+        "Senha" => $_POST['senha'],
         "Nome do Funcionário" => $_POST['funcionario']
     ];
     
@@ -91,10 +92,8 @@ if ($_POST) {
     if($senha == $confirmacaoSenha){
         echo "<div class='resultado'>";
         
-        foreach ($dadosCadastro as $tipoDeDado => $dado){
-            echo "<p><strong>$tipoDeDado: </strong> $dado</p>";
-        }
-
+        echo "Cadastro realizado.";
+    
         echo "</div>";
         echo "<br><br><br>";
     }
@@ -103,6 +102,25 @@ if ($_POST) {
         echo "As senhas são incompatíveis.";
         echo "</div>";
         echo "<br><br><br>";
+    }
+
+    $conteudo = "Usuário: ";
+
+    foreach ($dadosCadastro as $tipoDeDado => $dado){
+        $conteudo .= $dado.", ";
+    }
+
+    $conteudo .= "
+
+    ";
+
+    $caminho = "dados/usarios.txt";
+
+    if (file_put_contents($caminho, $conteudo, FILE_APPEND)){
+        echo "<script>alert('Dados cadastrados com sucesso!');</script>";
+    }
+    else{
+        echo "<script>alert('Erro ao cadastrar.');</script>";
     }
 }
 ?>

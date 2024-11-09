@@ -46,59 +46,59 @@
 
             <label>Nome:</label>
             <br>
-            <input type="text" name="nome" id="nome" maxlength="100">
+            <input required type="text" name="nome" id="nome" maxlength="100">
             <br>
 
             <label>CPF:</label>
             <br>
-            <input type="text" pattern="[0-9\-.]+" name="cpf" id="cpf" maxlength="11" placeholder="Apenas números" onchange="validaCPF()">
+            <input required type="text" pattern="[0-9\-.]+" name="cpf" id="cpf" maxlength="11" placeholder="Apenas números" onchange="validaCPF()">
             <br>
             <p id="consultaDeCPF"></p> 
             <br>
 
             <label>RG:</label>
             <br>
-            <input type="text" pattern="[0-9\-.]+" name="rg" id="rg" maxlength="8" placeholder="Apenas números">
+            <input required type="text" pattern="[0-9\-.]+" name="rg" id="rg" maxlength="8" placeholder="Apenas números">
             <br>
 
             <label>CEP:</label>
             <br>
-            <input type="text" pattern="[0-9\-]+" name="cep" id="cep" maxlength="9" placeholder="Apenas números" onchange="pegaEndereco()">
+            <input required type="text" pattern="[0-9\-]+" name="cep" id="cep" maxlength="9" placeholder="Apenas números" onchange="pegaEndereco()">
             <br>
 
             <label>Estado:</label>
             <br>
-            <input type="text" name="uf" id="uf">
+            <input required type="text" name="uf" id="uf">
             <br>
 
             <label>Cidade:</label>
             <br>
-            <input type="text" name="cidade" id="cidade">
+            <input required type="text" name="cidade" id="cidade">
             <br>
 
             <label>Bairro:</label>
             <br>
-            <input type="text" name="bairro" id="bairro">
+            <input required type="text" name="bairro" id="bairro">
             <br>
 
             <label>Rua:</label>
             <br>
-            <input type="text" name="rua" id="rua">
+            <input required type="text" name="rua" id="rua">
             <br>
 
             <label>Nº:</label>
             <br>
-            <input type="text" name="numero-rua" id="numero-rua">
+            <input required type="text" name="numero-rua" id="numero-rua">
             <br>
 
             <label>Celular:</label>
             <br>
-            <input type="number" name="cel" id="cel">
+            <input required type="number" name="cel" id="cel">
             <br>
 
             <label>Email:</label>
             <br>
-            <input type="email" name="email" id="email">
+            <input required type="email" name="email" id="email">
             <br>
 
             <div class="formulario-botoes">
@@ -139,5 +139,24 @@ if ($_POST) {
 
     echo "</div>";
     echo "<br><br><br>";
+
+    $conteudo = "Cliente: ";
+
+    foreach ($dadosCadastro as $tipoDeDado => $dado){
+        $conteudo .= $dado.", ";
+    }
+
+    $conteudo .= "
+
+    ";
+
+    $caminho = "dados/clientes.txt";
+
+    if (file_put_contents($caminho, $conteudo, FILE_APPEND)){
+        echo "<script>alert('Dados cadastrados com sucesso!');</script>";
+    }
+    else{
+        echo "<script>alert('Erro ao cadastrar.');</script>";
+    }
 }
 ?>
