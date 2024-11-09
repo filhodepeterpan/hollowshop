@@ -1,4 +1,20 @@
 document.addEventListener("DOMContentLoaded", function(){
+    const botoes = document.querySelectorAll("button");
+    const audioMouseover = new Audio("assets/audio/mouse_passando.mp3");
+    const audioClick = new Audio("assets/audio/clicando.mp3");
+
+    botoes.forEach(botao => {
+
+        botao.addEventListener("mouseover", function(){
+            audioMouseover.play();
+        });
+
+        botao.addEventListener("click", function(){
+            console.log("Botão clicado!");
+            audioClick.play();
+        });
+    });
+
     const links = document.querySelectorAll("select");
 
     links.forEach(link => {
@@ -46,6 +62,7 @@ window.addEventListener("load", function(){
     document.addEventListener("click", function(){
         musica.play();
     });
+
 });
 
 const email = document.getElementById("email");
@@ -211,5 +228,3 @@ function validaCNPJ() {
     consultaDeCNPJ.innerHTML = "CNPJ válido!";
     return true;
 }
-
-
