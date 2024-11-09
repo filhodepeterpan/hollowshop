@@ -43,7 +43,7 @@
         $emailPadrao = "admin@admin";
         $senhaPadrao = "admin";
 
-        if($email == $emailPadrao || $senha == $senhaPadrao){
+        if($email == $emailPadrao && $senha == $senhaPadrao){
             echo $email . "<br>" . $senha;
         }
     }
