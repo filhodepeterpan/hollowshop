@@ -41,7 +41,7 @@
     <div class="menu-conteudo">
 
         <div class="menu-conteudo-esquerdo">
-            <h1>Cadastres os NPCS e itens de sua preferência no mundo de Hollow Knight!</h1>
+            <h1>Cadastre os NPCS e itens de sua preferência no mundo de Hollow Knight!</h1>
             <br>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam iste nostrum, consectetur doloremque soluta veritatis aliquid perspiciatis sed, nam hic porro ducimus! Libero culpa tempore nostrum cupiditate sed laborum aspernatur.
             Voluptatum placeat inventore quos enim quia veniam mollitia laudantium laboriosam fuga temporibus pariatur accusantium corporis doloribus incidunt, eveniet illo recusandae necessitatibus, veritatis delectus? Delectus aut laboriosam, impedit eos quas reiciendis!
