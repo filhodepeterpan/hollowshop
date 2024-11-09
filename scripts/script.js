@@ -109,6 +109,7 @@ function pegaEndereco(){
 
 function validaCPF() {
     const cpf = document.getElementById("cpf").value;
+    const campoCPF = document.getElementById("cpf");
     const consultaDeCPF = document.getElementById("consultaDeCPF");
 
     if (isNaN(cpf) ||
@@ -124,6 +125,7 @@ function validaCPF() {
         cpf == 88888888888 ||
         cpf == 99999999999){
         consultaDeCPF.innerHTML = "CPF inválido!";
+        campoCPF.value = "";
         return false;
     }
 
@@ -136,6 +138,7 @@ function validaCPF() {
     resto = (soma * 10) % 11;
     if ((resto === 10 || resto === 11) ? parseInt(cpf.charAt(9)) !== 0 : parseInt(cpf.charAt(9)) !== resto) {
         consultaDeCPF.innerHTML = "CPF inválido!";
+        campoCPF.value = "";
         return false;
     }
 
@@ -147,6 +150,7 @@ function validaCPF() {
     resto = (soma * 10) % 11;
     if ((resto === 10 || resto === 11) ? parseInt(cpf.charAt(10)) !== 0 : parseInt(cpf.charAt(10)) !== resto) {
         consultaDeCPF.innerHTML = "CPF inválido!";
+        campoCPF.value = "";
         return false;
     }
 
@@ -156,6 +160,7 @@ function validaCPF() {
 
 function validaCNPJ() {
     const cnpj = document.getElementById("cnpj").value;
+    const campoCNPJ = document.getElementById("cnpj");
     const consultaDeCNPJ = document.getElementById("consultaDeCNPJ");
 
     const cnpjLimpo = cnpj.replace(/[^\d]+/g, '');
@@ -163,7 +168,7 @@ function validaCNPJ() {
     if (cnpjLimpo.length !== 14 ||
         /^(\d)\1+$/.test(cnpjLimpo)) {
         consultaDeCNPJ.innerHTML = "CNPJ inválido!";
-        cpf = "";
+        campoCNPJ.value = "";
         return false;
     }
 
@@ -182,7 +187,7 @@ function validaCNPJ() {
     let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
     if (resultado != digitos.charAt(0)) {
         consultaDeCNPJ.innerHTML = "CNPJ inválido!";
-        cpf = "";
+        campoCNPJ.value = "";
         return false;
     }
 
@@ -199,7 +204,7 @@ function validaCNPJ() {
     resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
     if (resultado != digitos.charAt(1)) {
         consultaDeCNPJ.innerHTML = "CNPJ inválido!";
-        cpf = "";
+        campoCNPJ.value = "";
         return false;
     }
 
