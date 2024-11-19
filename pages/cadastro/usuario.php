@@ -79,48 +79,46 @@
 </html>
 
 <?php
-if ($_POST) {
-    $dadosCadastro = [
-        "Usuário:" => $_POST['usuario'],
-        "Senha" => $_POST['senha'],
-        "Nome do Funcionário" => $_POST['funcionario']
-    ];
-    
-    $senha = $_POST['senha'];
-    $confirmacaoSenha = $_POST['confirmacao-senha'];
-
-    if($senha == $confirmacaoSenha){
-        echo "<div class='resultado'>";
+    if ($_POST) {
+        $dadosCadastro = [
+            "Usuário:" => $_POST['usuario'],
+            "Senha" => $_POST['senha'],
+            "Nome do Funcionário" => $_POST['funcionario']
+        ];
         
-        echo "Cadastro realizado.";
-    
-        echo "</div>";
-        echo "<br><br><br>";
+        $senha = $_POST['senha'];
+        $confirmacaoSenha = $_POST['confirmacao-senha'];
+
+        if($senha == $confirmacaoSenha){
+            echo "<div class='resultado'>";
+            
+            echo "Cadastro realizado.";
+        
+            echo "</div>";
+            echo "<br><br><br>";
+        }
+        else{
+            echo "<div class='resultado'>";
+            echo "As senhas são incompatíveis.";
+            echo "</div>";
+            echo "<br><br><br>";
+        }
+
+        $conteudo = "Usuário: ";
+
+        foreach ($dadosCadastro as $tipoDeDado => $dado){
+            $conteudo .= $dado.", ";
+        }
+
+        $conteudo .= "\n\n";
+
+        $caminho = "dados/usuarios.txt";
+
+        if (file_put_contents($caminho, $conteudo, FILE_APPEND)){
+            echo "<script>alert('Dados cadastrados com sucesso!');</script>";
+        }
+        else{
+            echo "<script>alert('Erro ao cadastrar.');</script>";
+        }
     }
-    else{
-        echo "<div class='resultado'>";
-        echo "As senhas são incompatíveis.";
-        echo "</div>";
-        echo "<br><br><br>";
-    }
-
-    $conteudo = "Usuário: ";
-
-    foreach ($dadosCadastro as $tipoDeDado => $dado){
-        $conteudo .= $dado.", ";
-    }
-
-    $conteudo .= "
-
-    ";
-
-    $caminho = "dados/usarios.txt";
-
-    if (file_put_contents($caminho, $conteudo, FILE_APPEND)){
-        echo "<script>alert('Dados cadastrados com sucesso!');</script>";
-    }
-    else{
-        echo "<script>alert('Erro ao cadastrar.');</script>";
-    }
-}
 ?>

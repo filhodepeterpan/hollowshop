@@ -104,45 +104,43 @@
 </html>
 
 <?php
-if ($_POST) {
-    $dadosCadastro = [
-        "Código do Produto" => $_POST['codigo'],
-        "Nome do Produto" => $_POST['nome'],
-        "Categoria" => $_POST['cateogria'],
-        "Descrição" => $_POST['descricao'],
-        "Preço de Compra" => $_POST['preco'],
-        "Quantidade" => $_POST['quantidade'],
-        "Data de Compra" => $_POST['data-compra'],
-        "Data de Validade" => $_POST['data-validade'],
-        "Fornecedor" => $_POST['fornecedor']
-    ];
-    
-    echo "<div class='resultado'>";
-    
-    foreach ($dadosCadastro as $tipoDeDado => $dado){
-        echo "<p><strong>$tipoDeDado: </strong> $dado</p>";
+    if ($_POST) {
+        $dadosCadastro = [
+            "Código do Produto" => $_POST['codigo'],
+            "Nome do Produto" => $_POST['nome'],
+            "Categoria" => $_POST['cateogria'],
+            "Descrição" => $_POST['descricao'],
+            "Preço de Compra" => $_POST['preco'],
+            "Quantidade" => $_POST['quantidade'],
+            "Data de Compra" => $_POST['data-compra'],
+            "Data de Validade" => $_POST['data-validade'],
+            "Fornecedor" => $_POST['fornecedor']
+        ];
+        
+        echo "<div class='resultado'>";
+        
+        foreach ($dadosCadastro as $tipoDeDado => $dado){
+            echo "<p><strong>$tipoDeDado: </strong> $dado</p>";
+        }
+
+        echo "</div>";
+        echo "<br><br><br>";
+
+        $conteudo = "Produto: ";
+
+        foreach ($dadosCadastro as $tipoDeDado => $dado){
+            $conteudo .= $dado.", ";
+        }
+
+        $conteudo .= "\n\n";
+
+        $caminho = "dados/produto.txt";
+
+        if (file_put_contents($caminho, $conteudo, FILE_APPEND)){
+            echo "<script>alert('Dados cadastrados com sucesso!');</script>";
+        }
+        else{
+            echo "<script>alert('Erro ao cadastrar.');</script>";
+        }
     }
-
-    echo "</div>";
-    echo "<br><br><br>";
-
-    $conteudo = "Produto: ";
-
-    foreach ($dadosCadastro as $tipoDeDado => $dado){
-        $conteudo .= $dado.", ";
-    }
-
-    $conteudo .= "
-
-    ";
-
-    $caminho = "dados/produto.txt";
-
-    if (file_put_contents($caminho, $conteudo, FILE_APPEND)){
-        echo "<script>alert('Dados cadastrados com sucesso!');</script>";
-    }
-    else{
-        echo "<script>alert('Erro ao cadastrar.');</script>";
-    }
-}
 ?>

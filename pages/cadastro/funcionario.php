@@ -58,7 +58,7 @@
             
             <label>RG:</label>
             <br>
-            <input required type="text" pattern="[0-9\-.]+" name="rg" id="rg" maxlength="8" placeholder="Apenas números">
+            <input required type="text" pattern="[0-9\-.]+" name="rg" id="rg" maxlength="9" placeholder="Apenas números">
             <br>
 
             <label>CEP:</label>
@@ -121,48 +121,46 @@
 </html>
 
 <?php
-if ($_POST) {
-    $dadosCadastro = [
-        "Nome" => $_POST['nome'],
-        "CPF" => $_POST['cpf'],
-        "RG" => $_POST['rg'],
-        "CEP" => $_POST['cep'],
-        "Estado" => $_POST['uf'],
-        "Cidade" => $_POST['cidade'],
-        "Bairro" => $_POST['bairro'],
-        "Rua" => $_POST['rua'],
-        "Número" => $_POST['numero-rua'],
-        "Cel" => $_POST['cel'],
-        "Email" => $_POST['email'],
-        "Data de Admissão" => $_POST["data-admissao"]
-    ];
-    
-    echo "<div class='resultado'>";
-    
-    foreach ($dadosCadastro as $tipoDeDado => $dado){
-        echo "<p><strong>$tipoDeDado: </strong> $dado</p>";
+    if ($_POST) {
+        $dadosCadastro = [
+            "Nome" => $_POST['nome'],
+            "CPF" => $_POST['cpf'],
+            "RG" => $_POST['rg'],
+            "CEP" => $_POST['cep'],
+            "Estado" => $_POST['uf'],
+            "Cidade" => $_POST['cidade'],
+            "Bairro" => $_POST['bairro'],
+            "Rua" => $_POST['rua'],
+            "Número" => $_POST['numero-rua'],
+            "Cel" => $_POST['cel'],
+            "Email" => $_POST['email'],
+            "Data de Admissão" => $_POST["data-admissao"]
+        ];
+        
+        echo "<div class='resultado'>";
+        
+        foreach ($dadosCadastro as $tipoDeDado => $dado){
+            echo "<p><strong>$tipoDeDado: </strong> $dado</p>";
+        }
+
+        echo "</div>";
+        echo "<br><br><br>";
+
+        $conteudo = "Funcionário: ";
+
+        foreach ($dadosCadastro as $tipoDeDado => $dado){
+            $conteudo .= $dado.", ";
+        }
+
+        $conteudo .= "\n\n";
+
+        $caminho = "dados/funcionarios.txt";
+
+        if (file_put_contents($caminho, $conteudo, FILE_APPEND)){
+            echo "<script>alert('Dados cadastrados com sucesso!');</script>";
+        }
+        else{
+            echo "<script>alert('Erro ao cadastrar.');</script>";
+        }
     }
-
-    echo "</div>";
-    echo "<br><br><br>";
-
-    $conteudo = "Funcionário: ";
-
-    foreach ($dadosCadastro as $tipoDeDado => $dado){
-        $conteudo .= $dado.", ";
-    }
-
-    $conteudo .= "
-
-    ";
-
-    $caminho = "dados/funcionarios.txt";
-
-    if (file_put_contents($caminho, $conteudo, FILE_APPEND)){
-        echo "<script>alert('Dados cadastrados com sucesso!');</script>";
-    }
-    else{
-        echo "<script>alert('Erro ao cadastrar.');</script>";
-    }
-}
 ?>

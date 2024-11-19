@@ -32,19 +32,18 @@
                 <option value="produto.php">Produto</option>
                 <option value="usuario.php">Usuário</option>
             </select>
-
             <a href="../../index.php" id="deslogar">Sair</a>
 
         </nav>
     </header>
-
+    <div class="consulta">
+    <?php
+            $caminho = "../cadastro/dados/clientes.txt";
+            if(file_exists($caminho))
+            echo  nl2br(file_get_contents($caminho));
+        ?>
+    </div>
     <script src="../../scripts/script.js"></script>
     
 </body>
 </html>
-
-<?php
-    if($_POST){
-      
-    }
-?>

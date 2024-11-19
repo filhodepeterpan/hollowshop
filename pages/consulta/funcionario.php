@@ -37,7 +37,13 @@
 
         </nav>
     </header>
-
+    <div class="consulta">
+    <?php
+            $caminho = "../cadastro/dados/funcionarios.txt";
+            if(file_exists($caminho))
+            echo  nl2br(file_get_contents($caminho));
+        ?>
+    </div>
     <script src="../../scripts/script.js"></script>
     
 </body>

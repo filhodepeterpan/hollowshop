@@ -121,48 +121,46 @@
 </html>
 
 <?php
-if ($_POST) {
-    $dadosCadastro = [
-        "Nome" => $_POST['nome'],
-        "CNPJ" => $_POST['cnpj'],
-        "I.E" => $_POST['ie'],
-        "CEP" => $_POST['cep'],
-        "Estado" => $_POST['uf'],
-        "Cidade" => $_POST['cidade'],
-        "Bairro" => $_POST['bairro'],
-        "Rua" => $_POST['rua'],
-        "Número" => $_POST['numero-rua'],
-        "Cel" => $_POST['cel'],
-        "Email" => $_POST['email'],
-        "Vendedor" => $_POST["vendedor"]
-    ];
-    
-    echo "<div class='resultado'>";
-    
-    foreach ($dadosCadastro as $tipoDeDado => $dado){
-        echo "<p><strong>$tipoDeDado: </strong> $dado</p>";
+    if ($_POST) {
+        $dadosCadastro = [
+            "Nome" => $_POST['nome'],
+            "CNPJ" => $_POST['cnpj'],
+            "I.E" => $_POST['ie'],
+            "CEP" => $_POST['cep'],
+            "Estado" => $_POST['uf'],
+            "Cidade" => $_POST['cidade'],
+            "Bairro" => $_POST['bairro'],
+            "Rua" => $_POST['rua'],
+            "Número" => $_POST['numero-rua'],
+            "Cel" => $_POST['cel'],
+            "Email" => $_POST['email'],
+            "Vendedor" => $_POST["vendedor"]
+        ];
+        
+        echo "<div class='resultado'>";
+        
+        foreach ($dadosCadastro as $tipoDeDado => $dado){
+            echo "<p><strong>$tipoDeDado: </strong> $dado</p>";
+        }
+
+        echo "</div>";
+        echo "<br><br><br>";
+
+        $conteudo = "Fornecedor: ";
+
+        foreach ($dadosCadastro as $tipoDeDado => $dado){
+            $conteudo .= $dado.", ";
+        }
+
+        $conteudo .= "\n\n";
+
+        $caminho = "dados/fornecedores.txt";
+
+        if (file_put_contents($caminho, $conteudo, FILE_APPEND)){
+            echo "<script>alert('Dados cadastrados com sucesso!');</script>";
+        }
+        else{
+            echo "<script>alert('Erro ao cadastrar.');</script>";
+        }
     }
-
-    echo "</div>";
-    echo "<br><br><br>";
-
-    $conteudo = "Fornecedor: ";
-
-    foreach ($dadosCadastro as $tipoDeDado => $dado){
-        $conteudo .= $dado.", ";
-    }
-
-    $conteudo .= "
-
-    ";
-
-    $caminho = "dados/fornecedores.txt";
-
-    if (file_put_contents($caminho, $conteudo, FILE_APPEND)){
-        echo "<script>alert('Dados cadastrados com sucesso!');</script>";
-    }
-    else{
-        echo "<script>alert('Erro ao cadastrar.');</script>";
-    }
-}
 ?>

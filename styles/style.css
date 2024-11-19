@@ -139,3 +139,8 @@ nav{
    flex-direction: column;
    text-align: center;
 }
+
+.consulta{
+    text-align: center;
+    margin: 2rem;
+}
