@@ -37,20 +37,44 @@
 
         </nav>
     </header>
-    <div class="consulta">
-        <?php
-            $caminho = "../cadastro/dados/usuarios.txt";
-            if(file_exists($caminho))
-            echo  nl2br(file_get_contents($caminho));
-        ?>
-    </div>
     <script src="../../scripts/script.js"></script>
-    
 </body>
 </html>
 
 <?php
-    if($_POST){
-      
-    }
+  
+  include_once('../../config/conexao.php');
+
+  echo "<div class='consulta'>";
+
+  try{
+      $select = $conn->prepare('SELECT * FROM usuario');
+      $select->execute();
+
+      while($row = $select->fetch()){
+          echo "<p>";
+          // echo "<br>"<img src=' ".$row['imagem']. " ' width=80px>";
+          echo "<br><b>Código: </b>" . $row['codigo'];
+          echo "<br><b>Nome do Usuario: </b>" . $row['nm_usuario'];
+          echo "<br><b>Senha: </b>" . $row['senha'];
+          echo "<br><b>Funcionario: </b>" . $row['funcionario'];
+          echo "<br><br>";
+
+          ?>
+          <button onclick="window.location.href='../alteracoes/alterarUsuario.php?id=<?php echo $row['codigo'];?>'">
+              Alterar
+          </button>
+          <button onclick="window.location.href='../exclusoes/excluirUsuario.php?id=<?php echo $row['codigo'];?>'">
+              Excluir
+          </button>
+          <br><br>
+          <hr>
+  <?php
+      }
+  }
+  catch(PDOException $e){
+      echo 'ERROR: ' . $e->getMessage();
+  }
+
+  echo "</div>";
 ?>

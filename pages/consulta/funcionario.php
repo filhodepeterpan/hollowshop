@@ -50,7 +50,42 @@
 </html>
 
 <?php
-    if($_POST){
-      
-    }
+  
+  include_once('../../config/conexao.php');
+  try{
+      $select = $conn->prepare('SELECT * FROM funcionario');
+      $select->execute();
+
+      while($row = $select->fetch()){
+          echo "<p>";
+          // echo "<br>"<img src=' ".$row['imagem']. " ' width=80px>";
+          echo "<br><b>Código: </b>" . $row['codigo'];
+          echo "<br><b>Nome: </b>" . $row['nome'];
+          echo "<br><b>CNPJ: </b>" . $row['cnpj'];
+          echo "<br><b>CEP: </b>" . $row['cep'];
+          echo "<br><b>UF: </b>" . $row['uf'];
+          echo "<br><b>Cidade: </b>" . $row['cidade'];
+          echo "<br><b>Bairro: </b>" . $row['bairro'];
+          echo "<br><b>Rua: </b>" . $row['rua'];
+          echo "<br><b>Numero: </b>" . $row['numero'];
+          echo "<br><b>Celular: </b>" . $row ['celular'];
+          echo "<br><b>Email: </b>" . $row ['email'];
+          echo "<br><b>DataAdmissão: </b>" . $row ['dataAdmissao'];
+          echo "<br><br>";
+
+          ?>
+          <button onclick="window.location.href='../alteracoes/alterarFuncionario.php?id=<?php echo $row['codigo'];?>'">
+              Alterar
+          </button>
+          <button onclick="window.location.href='../exclusoes/excluirFuncionario.php?id=<?php echo $row['codigo'];?>'">
+              Excluir
+          </button>
+          <br><br>
+          <hr>
+  <?php
+      }
+  }
+  catch(PDOException $e){
+      echo 'ERROR: ' . $e->getMessage();
+  }
 ?>

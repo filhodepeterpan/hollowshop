@@ -37,13 +37,42 @@
         </nav>
     </header>
     <div class="consulta">
-    <?php
-            $caminho = "../cadastro/dados/clientes.txt";
-            if(file_exists($caminho))
-            echo  nl2br(file_get_contents($caminho));
-        ?>
     </div>
     <script src="../../scripts/script.js"></script>
     
 </body>
 </html>
+<?php
+   include_once('../../config/conexao.php');
+    try{
+        $select = $conn->prepare('SELECT * FROM cliente');
+        $select->execute();
+
+        while($row = $select->fetch()){
+            echo "<p>";
+            // echo "<br>"<img src=' ".$row['imagem']. " ' width=80px>";
+            echo "<br><b>Código: </b>" . $row['codigo'];
+            echo "<br><b>Nome: </b>" . $row['nome'];
+            echo "<br><b>CPF: </b>" . $row['cpf'];
+            echo "<br><b>RG: </b>" . $row['rg'];
+            echo "<br><b>CEP: </b>" . $row['cep'];
+            echo "<br><b>Número: </b>" . $row['numero'];
+            echo "<br><b>Celular: </b>" . $row['celular'];
+            echo "<br><b>Email: </b>" . $row['email'];
+            echo "<br><br>";
+        ?>
+        <button onclick="window.location.href='../alteracoes/alterarCliente.php?id=<?php echo $row['codigo'];?>'">
+            Alterar
+        </button>
+        <button onclick="window.location.href='../exclusoes/excluirCliente.php?id=<?php echo $row['codigo'];?>'">
+            Excluir
+        </button>
+        <br><br>
+        <hr>
+<?php
+        }
+    }
+    catch(PDOException $e){
+        echo 'ERROR: ' . $e->getMessage();
+    }
+?>
