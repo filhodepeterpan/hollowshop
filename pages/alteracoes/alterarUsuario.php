@@ -9,19 +9,31 @@
     <title>HOLLOWSHOP | Cadastro</title>
 </head>
 <body>
+
+    <?php 
+        $cod = $_GET['id'];
+
+        include_once('../../config/conexao.php');
+
+        $select = $conn->prepare("SELECT * FROM usuario where codigo=$cod");
+        $select->execute();
+
+        $row = $select->fetch();  
+    ?>
+
     <header class="cabecalho">
-        <div class="logo" >
+        <div class="logo">
             <h1 id="hollowshop-form">HOLLOWSHOP</h1>
         </div>
         <nav>
 
             <select name="cadastro" id="cadastro">
                 <option value="">Cadastro</option>
-                <option value="cliente.php">Cliente</option>
-                <option value="funcionario.php">Funcionário</option>
-                <option value="fornecedor.php">Fornecedor</option>
-                <option value="produto.php">Produto</option>
-                <option value="usuario.php">Usuário</option>
+                <option value="../cadastro/cliente.php">Cliente</option>
+                <option value="../cadastro/funcionario.php">Funcionário</option>
+                <option value="../cadastro/fornecedor.php">Fornecedor</option>
+                <option value="../cadastro/produto.php">Produto</option>
+                <option value="../cadastro/usuario.php">Usuário</option>
             </select>
 
             <select name="consulta" id="consulta">
@@ -40,18 +52,20 @@
 
     <div class="formulario">
         
-        <form id="formulario-cadastro" action="#" method="POST">
+        <form id="formulario-cadastro" action="confirmaAlterarUsuario.php" method="POST">
 
-            <h1 id="formulario-titulo">Cadastro de Usuário</h1>
+            <h1 id="formulario-titulo">Alterar Cadastro de Usuário</h1>
 
+            <label>Código</label>
+            <input type="text" name="codigo" value="<?php echo $row['codigo']; ?>" readonly="true">
             <label>Nome de usuário:</label>
             <br>
-            <input required type="text" name="usuario" id="nome-de-usuario">
+            <input required type="text" name="usuario" id="nome-de-usuario" value="<?php echo $row['nm_usuario']; ?>">
             <br>
 
             <label>Senha:</label>
             <br>
-            <input required type="password" name="senha" id="senha-do-usuario">
+            <input required type="password" name="senha" id="senha-do-usuario" value="<?php echo $row['senha']; ?>">
             <br>
             
             <label>Confirmar Senha:</label>
@@ -61,11 +75,11 @@
 
             <label>Funcionário:</label>
             <br>
-            <input required type="text" name="funcionario" id="funcionario">
+            <input required type="text" name="funcionario" id="funcionario" value="<?php echo $row['funcionario']; ?>">
             <br>
 
             <div class="formulario-botoes">
-                <button type="submit" id="botaoCadastro">Cadastrar</button>
+                <button type="submit" id="botaoCadastro">Salvar</button>
                 <button type="button" id="botaoLimpar" onclick="limpaFormulario()">Limpar</button>
             </div>
 
@@ -77,44 +91,3 @@
     
 </body>
 </html>
-
-<?php
-if(!empty($_POST))
-{
-	$usuario = $_POST['usuario'];
-	$senha = $_POST['senha'];
-	$funcionario = $_POST['funcionario'];
-
-	include_once('../../config/conexao.php');
-
-	try {
-/*
-		
-    $ext = strtolower(substr($_FILES['pic']['name'],-4)); //Pegando extensão do arquivo
-    $new_name = date("Y.m.d-H.i.s") . $ext; //Definindo um novo nome para o arquivo
-    $dir = 'img/cliente/'; //Diretório para uploads
- 
-    move_uploaded_file($_FILES['pic']['tmp_name'], $dir.$new_name); //Fazer upload do arquivo
-
-    $enderecoImagem = $dir.$new_name;
-*/	  
-	  
-	  $stmt = $conn->prepare("INSERT INTO usuario (nm_usuario, senha, funcionario) VALUES (:nm_usuario, :senha, :funcionario)");
-
-	  $stmt->bindParam(':nm_usuario', $usuario);
-	  $stmt->bindParam(':senha', $senha);
-	  $stmt->bindParam(':funcionario', $funcionario);
-	  //$stmt->bindParam(':imagem', $enderecoImagem);
-	  
-	  $stmt->execute();
-
-	  
-
-	  echo "<script>alert('Cadastrado com Sucesso');</script>";
-
-	} catch(PDOException $e) {
-	  echo "Erro ao cadastrar: " . $e->getMessage();
-	}
-	$conn = null;
-}
-?>

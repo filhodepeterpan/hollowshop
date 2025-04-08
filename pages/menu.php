@@ -43,9 +43,7 @@
         <div class="menu-conteudo-esquerdo">
             <h1>Cadastre os NPCS e itens de sua preferência no mundo de Hollow Knight!</h1>
             <br>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam iste nostrum, consectetur doloremque soluta veritatis aliquid perspiciatis sed, nam hic porro ducimus! Libero culpa tempore nostrum cupiditate sed laborum aspernatur.
-            Voluptatum placeat inventore quos enim quia veniam mollitia laudantium laboriosam fuga temporibus pariatur accusantium corporis doloribus incidunt, eveniet illo recusandae necessitatibus, veritatis delectus? Delectus aut laboriosam, impedit eos quas reiciendis!
-            Eligendi ducimus necessitatibus dolorem quis, magni officiis hic ut quos fuga numquam rem asperiores sequi delectus! Nesciunt consequatur molestiae deserunt ex eligendi cumque veniam ut, unde aspernatur ea ducimus? Quae!</p>
+            <p>Hallownest é um reino composto de diferentes insetos, sob o poder do Rei Pálido. Esse ser é um Wyrm, uma espécie de minhoca colossal, que abandonou sua carapaça na região para assumir uma nova forma. O Rei unificou essas diferentes comunidades e lhes forneceu, dentre outras coisas, a luz da consciência para deixarem de ser animais irracionais movidos por instintos. Nem todos os insetos o seguiram, mas sua influência estava em toda a região.</p>
         </div>
 
         <div class="menu-conteudo-direito">
