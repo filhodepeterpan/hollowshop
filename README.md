@@ -31,4 +31,4 @@
 
 &nbsp;
 
-![Dados Armazenados](./assets/img/screenshots/dado-armazenado.png)
+![Dados Armazenados](./assets/img/screenshots/arquivos-config.png)
