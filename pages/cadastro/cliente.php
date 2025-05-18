@@ -9,34 +9,7 @@
     <title>HOLLOWSHOP | Cadastro</title>
 </head>
 <body>
-    <header class="cabecalho">
-        <div class="logo">
-            <h1 id="hollowshop-form">HOLLOWSHOP</h1>
-        </div>
-        <nav>
-
-            <select name="cadastro" id="cadastro">
-                <option value="">Cadastro</option>
-                <option value="cliente.php">Cliente</option>
-                <option value="funcionario.php">Funcionário</option>
-                <option value="fornecedor.php">Fornecedor</option>
-                <option value="produto.php">Produto</option>
-                <option value="usuario.php">Usuário</option>
-            </select>
-
-            <select name="consulta" id="consulta">
-                <option selected value="">Consulta</option>
-                <option value="../consulta/cliente.php">Cliente</option>
-                <option value="../consulta/funcionario.php">Funcionário</option>
-                <option value="../consulta/fornecedor.php">Fornecedor</option>
-                <option value="../consulta/produto.php">Produto</option>
-                <option value="../consulta/usuario.php">Usuário</option>
-            </select>
-
-            <a href="../../index.php" id="deslogar">Sair</a>
-
-        </nav>
-    </header>
+    <?php include __DIR__ . '/../header.php'; ?>
 
     <div class="formulario">
         
@@ -88,7 +61,7 @@
 
             <label>Nº:</label>
             <br>
-            <input required type="text" name="numero-rua" id="numero-rua">
+            <input required type="text" name="numero" id="numero">
             <br>
 
             <label>Celular:</label>
@@ -116,45 +89,55 @@
 </html>
 
 <?php
-    if ($_POST) {
-        $dadosCadastro = [
-            "Nome" => $_POST['nome'],
-            "CPF" => $_POST['cpf'],
-            "RG" => $_POST['rg'],
-            "CEP" => $_POST['cep'],
-            "Estado" => $_POST['uf'],
-            "Cidade" => $_POST['cidade'],
-            "Bairro" => $_POST['bairro'],
-            "Rua" => $_POST['rua'],
-            "Número" => $_POST['numero-rua'],
-            "Cel" => $_POST['cel'],
-            "Email" => $_POST['email']
-        ];
-        
-        echo "<div class='resultado'>";
-        
-        foreach ($dadosCadastro as $tipoDeDado => $dado){
-            echo "<p><strong>$tipoDeDado: </strong> $dado</p>";
-        }
+if(!empty($_POST))
+{
+	$nome = $_POST['nome'];
+	$cpf = $_POST['cpf'];
+	$rg = $_POST['rg'];
+    $cep = $_POST['cep'];
+    $cidade = $_POST['cidade'];
+    $uf = $_POST['uf'];
+    $rua = $_POST['rua'];
+    $bairro = $_POST['bairro'];
+	$numero = $_POST['numero'];
+	$celular = $_POST['cel'];
+	$email = $_POST['email'];
 
-        echo "</div>";
-        echo "<br><br><br>";
+	include_once('../../config/conexao.php');
 
-        $conteudo = "Cliente: ";
+	try {
+/*
+		$ext = strtolower(substr($_FILES['pic']['name'],-4)); //Pegando extensão do arquivo
+    $new_name = date("Y.m.d-H.i.s") . $ext; //Definindo um novo nome para o arquivo
+    $dir = 'img/cliente/'; //Diretório para uploads
+ 
+    move_uploaded_file($_FILES['pic']['tmp_name'], $dir.$new_name); //Fazer upload do arquivo
 
-        foreach ($dadosCadastro as $tipoDeDado => $dado){
-            $conteudo .= $dado.", ";
-        }
+    $enderecoImagem = $dir.$new_name;
+*/	  
+	  
+	  $stmt = $conn->prepare("INSERT INTO cliente (nome,cpf,rg,cep,cidade,numero,celular,email,uf,rua,bairro) VALUES (:nome,:cpf,:rg,:cep,:cidade,:numero,:celular,:email,:uf,:rua,:bairro)");
 
-        $conteudo .= "\n\n";
+	  $stmt->bindParam(':nome', $nome);
+	  $stmt->bindParam(':cpf', $cpf);
+	  $stmt->bindParam(':rg', $rg);
+      $stmt->bindParam(':cep', $cep);
+      $stmt->bindParam(':cidade', $cidade);
+	  $stmt->bindParam(':numero', $numero);
+	  $stmt->bindParam(':celular', $celular);
+	  $stmt->bindParam(':email', $email);
+      $stmt->bindParam(':uf', $uf);
+      $stmt->bindParam(':rua', $rua);
+      $stmt->bindParam(':bairro', $bairro);
+	  //$stmt->bindParam(':imagem', $enderecoImagem);
+	  
+	  $stmt->execute();
 
-        $caminho = "dados/clientes.txt";
+	  echo "<script>alert('Cadastrado com Sucesso');</script>";
 
-        if (file_put_contents($caminho, $conteudo, FILE_APPEND)){
-            echo "<script>alert('Dados cadastrados com sucesso!');</script>";
-        }
-        else{
-            echo "<script>alert('Erro ao cadastrar.');</script>";
-        }
-    }
+	} catch(PDOException $e) {
+	  echo "Erro ao cadastrar: " . $e->getMessage();
+	}
+	$conn = null;
+}
 ?>

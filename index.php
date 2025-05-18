@@ -1,3 +1,36 @@
+<?php 
+    session_start();
+
+    if (isset($_SESSION['erro'])) {
+        echo "<script>alert('{$_SESSION['erro']}');</script>";
+        unset($_SESSION['erro']);
+    }
+
+    if (!empty($_POST))
+    {
+        $usuario = $_POST['usuario'];
+        $senha = $_POST['senha'];
+
+        include_once('config/conexao.php');
+
+        $rs = $conn->query("SELECT * FROM usuario where nm_usuario='$usuario' and senha='$senha'");
+
+        $rs -> execute();
+
+        if($rs->fetch(PDO::FETCH_ASSOC) == true)
+        {
+            $_SESSION['login'] = $usuario;
+            header('Location:pages/menu.php');
+        }
+        else{
+            echo "
+                <script>
+                    alert('Nome de usuário ou senha incorretos');
+                </script>
+            ";
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,13 +45,13 @@
 
     <div class="tela">
 
-        <form class="tela-login" action="./pages/menu.php" method="POST">
+        <form class="tela-login" action="index.php" method="POST">
 
             <h1 id="tela-login-titulo">Entre agora na Hollowshop!</h1>
 
             <div class="tela-login-inputs">
-                <label>Email</label>
-                <input type="email" name="email" id="email">
+                <label>Usuário</label>
+                <input type="text" name="usuario" id="usuario">
                 <label>Senha</label>
                 <input type="password" name="senha" id="senha">
             </div>
@@ -37,14 +70,14 @@
 </html>
 
 <?php
-    if($_POST){
-        $email = $_POST["email"];
-        $senha = $_POST["senha"];
-        $emailPadrao = "admin@admin";
-        $senhaPadrao = "admin";
+    // if($_POST){
+    //     $email = $_POST["email"];
+    //     $senha = $_POST["senha"];
+    //     $emailPadrao = "admin@admin";
+    //     $senhaPadrao = "admin";
 
-        if($email == $emailPadrao && $senha == $senhaPadrao){
-            echo $email . "<br>" . $senha;
-        }
-    }
+    //     if($email == $emailPadrao && $senha == $senhaPadrao){
+    //         echo $email . "<br>" . $senha;
+    //     }
+    // }
 ?>

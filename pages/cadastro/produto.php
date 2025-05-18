@@ -9,34 +9,7 @@
     <title>HOLLOWSHOP | Cadastro</title>
 </head>
 <body>
-    <header class="cabecalho">
-        <div class="logo">
-            <h1 id="hollowshop-form">HOLLOWSHOP</h1>
-        </div>
-        <nav>
-
-            <select name="cadastro" id="cadastro">
-                <option value="">Cadastro</option>
-                <option value="cliente.php">Cliente</option>
-                <option value="funcionario.php">Funcionário</option>
-                <option value="fornecedor.php">Fornecedor</option>
-                <option value="produto.php">Produto</option>
-                <option value="usuario.php">Usuário</option>
-            </select>
-
-            <select name="consulta" id="consulta">
-                <option selected value="">Consulta</option>
-                <option value="../consulta/cliente.php">Cliente</option>
-                <option value="../consulta/funcionario.php">Funcionário</option>
-                <option value="../consulta/fornecedor.php">Fornecedor</option>
-                <option value="../consulta/produto.php">Produto</option>
-                <option value="../consulta/usuario.php">Usuário</option>
-            </select>
-
-            <a href="../../index.php" id="deslogar">Sair</a>
-
-        </nav>
-    </header>
+    <?php include __DIR__ . '/../header.php'; ?>
 
     <div class="formulario">
         
@@ -46,17 +19,17 @@
 
             <label>Código do Produto:</label>
             <br>
-            <input required type="text" name="codigo" id="codigo-produto">
+            <input required type="text" name="codigoProduto" id="codigoProduto">
             <br>
 
             <label>Nome do Produto:</label>
             <br>
-            <input required type="text" name="nome" id="nome-produto" maxlength="150">
+            <input required type="text" name="produto" id="produto" maxlength="150">
             <br>
             
             <label>Categoria:</label>
             <br>
-            <input required type="text" name="cateogria" id="categoria-produto" maxlength="100">
+            <input required type="text" name="categoria" id="categoria" maxlength="100">
             <br>
 
             <label>Descrição:</label>
@@ -104,43 +77,53 @@
 </html>
 
 <?php
-    if ($_POST) {
-        $dadosCadastro = [
-            "Código do Produto" => $_POST['codigo'],
-            "Nome do Produto" => $_POST['nome'],
-            "Categoria" => $_POST['cateogria'],
-            "Descrição" => $_POST['descricao'],
-            "Preço de Compra" => $_POST['preco'],
-            "Quantidade" => $_POST['quantidade'],
-            "Data de Compra" => $_POST['data-compra'],
-            "Data de Validade" => $_POST['data-validade'],
-            "Fornecedor" => $_POST['fornecedor']
-        ];
-        
-        echo "<div class='resultado'>";
-        
-        foreach ($dadosCadastro as $tipoDeDado => $dado){
-            echo "<p><strong>$tipoDeDado: </strong> $dado</p>";
-        }
-
-        echo "</div>";
-        echo "<br><br><br>";
-
-        $conteudo = "Produto: ";
-
-        foreach ($dadosCadastro as $tipoDeDado => $dado){
-            $conteudo .= $dado.", ";
-        }
-
-        $conteudo .= "\n\n";
-
-        $caminho = "dados/produto.txt";
-
-        if (file_put_contents($caminho, $conteudo, FILE_APPEND)){
-            echo "<script>alert('Dados cadastrados com sucesso!');</script>";
-        }
-        else{
-            echo "<script>alert('Erro ao cadastrar.');</script>";
-        }
-    }
+ if(!empty($_POST))
+ {
+     $codigoProduto = $_POST['codigoProduto'];
+     $produto = $_POST['produto'];
+     $categoria = $_POST['categoria'];
+     $descricao = $_POST['descricao'];
+     $preco = $_POST['preco'];
+     $quantidade = $_POST['quantidade'];
+     $dataCompra = $_POST['data-compra'];
+     $dataValidade = $_POST['data-validade'];
+     $fornecedor = $_POST['fornecedor'];
+ 
+     include_once('../../config/conexao.php');
+ 
+     try {
+ /*
+         $ext = strtolower(substr($_FILES['pic']['name'],-4)); //Pegando extensão do arquivo
+     $new_name = date("Y.m.d-H.i.s") . $ext; //Definindo um novo produto para o arquivo
+     $dir = 'img/cliente/'; //Diretório para uploads
+  
+     move_uploaded_file($_FILES['pic']['tmp_name'], $dir.$new_name); //Fazer upload do arquivo
+ 
+     $enderecoImagem = $dir.$new_name;
+ */	  
+       
+       $stmt = $conn->prepare("INSERT INTO produto (codigoProduto, produto, categoria, descricao, preco, quantidade, dataCompra, dataValidade, fornecedor) VALUES (:codigoProduto, :produto,:categoria,:descricao,:preco,:quantidade,:dataCompra,:dataValidade, :fornecedor)");
+ 
+       $stmt->bindParam(':codigoProduto', $codigoProduto);
+       $stmt->bindParam(':produto', $produto);
+       $stmt->bindParam(':categoria', $categoria);
+       $stmt->bindParam(':descricao', $descricao);
+       $stmt->bindParam(':preco', $preco);
+       $stmt->bindParam(':quantidade', $quantidade);
+       $stmt->bindParam(':dataCompra', $dataCompra);
+       $stmt->bindParam('dataValidade', $dataValidade);
+       $stmt->bindParam('fornecedor', $fornecedor);
+       //$stmt->bindParam(':imagem', $enderecoImagem);
+       
+       $stmt->execute();
+ 
+       
+ 
+       echo "<script>alert('Cadastrado com Sucesso');</script>";
+ 
+     } catch(PDOException $e) {
+       echo "Erro ao cadastrar: " . $e->getMessage();
+     }
+     $conn = null;
+ }
 ?>

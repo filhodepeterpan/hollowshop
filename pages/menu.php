@@ -1,3 +1,13 @@
+<?php
+session_start(); 
+
+if(empty($_SESSION['login']))
+{
+    $_SESSION['erro'] = "Você precisa logar no sistema.";
+    header("Location: ../index.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,34 +19,7 @@
     <title>HOLLOWSHOP</title>
 </head>
 <body>
-    <header class="cabecalho">
-        <div class="logo">
-            <h1 id="hollowshop-menu">HOLLOWSHOP</h1>
-        </div>
-        <nav>
-
-            <select name="cadastro" id="cadastro">
-                <option selected value="">Cadastro</option>
-                <option value="./cadastro/cliente.php">Cliente</option>
-                <option value="./cadastro/funcionario.php">Funcionário</option>
-                <option value="./cadastro/fornecedor.php">Fornecedor</option>
-                <option value="./cadastro/produto.php">Produto</option>
-                <option value="./cadastro/usuario.php">Usuário</option>
-            </select>
-
-            <select name="consulta" id="consulta">
-                <option selected value="">Consulta</option>
-                <option value="./consulta/cliente.php">Cliente</option>
-                <option value="./consulta/funcionario.php">Funcionário</option>
-                <option value="./consulta/fornecedor.php">Fornecedor</option>
-                <option value="./consulta/produto.php">Produto</option>
-                <option value="./consulta/usuario.php">Usuário</option>
-            </select>
-
-            <a href="../index.php" id="deslogar">Sair</a>
-
-        </nav>
-    </header>
+<?php include __DIR__ . '/header.php'; ?>
 
     <div class="menu-conteudo">
 
@@ -58,9 +41,3 @@
     
 </body>
 </html>
-
-<?php
-    if($_POST){
-      
-    }
-?>

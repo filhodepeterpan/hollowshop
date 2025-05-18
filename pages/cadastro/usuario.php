@@ -9,34 +9,7 @@
     <title>HOLLOWSHOP | Cadastro</title>
 </head>
 <body>
-    <header class="cabecalho">
-        <div class="logo">
-            <h1 id="hollowshop-form">HOLLOWSHOP</h1>
-        </div>
-        <nav>
-
-            <select name="cadastro" id="cadastro">
-                <option value="">Cadastro</option>
-                <option value="cliente.php">Cliente</option>
-                <option value="funcionario.php">Funcionário</option>
-                <option value="fornecedor.php">Fornecedor</option>
-                <option value="produto.php">Produto</option>
-                <option value="usuario.php">Usuário</option>
-            </select>
-
-            <select name="consulta" id="consulta">
-                <option selected value="">Consulta</option>
-                <option value="../consulta/cliente.php">Cliente</option>
-                <option value="../consulta/funcionario.php">Funcionário</option>
-                <option value="../consulta/fornecedor.php">Fornecedor</option>
-                <option value="../consulta/produto.php">Produto</option>
-                <option value="../consulta/usuario.php">Usuário</option>
-            </select>
-
-            <a href="../../index.php" id="deslogar">Sair</a>
-
-        </nav>
-    </header>
+    <?php include __DIR__ . '/../header.php'; ?>
 
     <div class="formulario">
         
@@ -79,46 +52,42 @@
 </html>
 
 <?php
-    if ($_POST) {
-        $dadosCadastro = [
-            "Usuário:" => $_POST['usuario'],
-            "Senha" => $_POST['senha'],
-            "Nome do Funcionário" => $_POST['funcionario']
-        ];
-        
-        $senha = $_POST['senha'];
-        $confirmacaoSenha = $_POST['confirmacao-senha'];
+if(!empty($_POST))
+{
+	$usuario = $_POST['usuario'];
+	$senha = $_POST['senha'];
+	$funcionario = $_POST['funcionario'];
 
-        if($senha == $confirmacaoSenha){
-            echo "<div class='resultado'>";
-            
-            echo "Cadastro realizado.";
-        
-            echo "</div>";
-            echo "<br><br><br>";
-        }
-        else{
-            echo "<div class='resultado'>";
-            echo "As senhas são incompatíveis.";
-            echo "</div>";
-            echo "<br><br><br>";
-        }
+	include_once('../../config/conexao.php');
 
-        $conteudo = "Usuário: ";
+	try {
+/*
+		
+    $ext = strtolower(substr($_FILES['pic']['name'],-4)); //Pegando extensão do arquivo
+    $new_name = date("Y.m.d-H.i.s") . $ext; //Definindo um novo nome para o arquivo
+    $dir = 'img/cliente/'; //Diretório para uploads
+ 
+    move_uploaded_file($_FILES['pic']['tmp_name'], $dir.$new_name); //Fazer upload do arquivo
 
-        foreach ($dadosCadastro as $tipoDeDado => $dado){
-            $conteudo .= $dado.", ";
-        }
+    $enderecoImagem = $dir.$new_name;
+*/	  
+	  
+	  $stmt = $conn->prepare("INSERT INTO usuario (nm_usuario, senha, funcionario) VALUES (:nm_usuario, :senha, :funcionario)");
 
-        $conteudo .= "\n\n";
+	  $stmt->bindParam(':nm_usuario', $usuario);
+	  $stmt->bindParam(':senha', $senha);
+	  $stmt->bindParam(':funcionario', $funcionario);
+	  //$stmt->bindParam(':imagem', $enderecoImagem);
+	  
+	  $stmt->execute();
 
-        $caminho = "dados/usuarios.txt";
+	  
 
-        if (file_put_contents($caminho, $conteudo, FILE_APPEND)){
-            echo "<script>alert('Dados cadastrados com sucesso!');</script>";
-        }
-        else{
-            echo "<script>alert('Erro ao cadastrar.');</script>";
-        }
-    }
+	  echo "<script>alert('Cadastrado com Sucesso');</script>";
+
+	} catch(PDOException $e) {
+	  echo "Erro ao cadastrar: " . $e->getMessage();
+	}
+	$conn = null;
+}
 ?>
