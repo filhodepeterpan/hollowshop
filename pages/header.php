@@ -25,6 +25,6 @@
             <option value="<?= BASE_URL ?>pages/consulta/usuario.php">Usuário</option>
         </select>
 
-        <a href="<?= BASE_URL ?>logout.php" id="deslogar">Sair</a>
+        <a href="<?= BASE_URL ?>pages/logout.php" id="deslogar">Sair</a>
     </nav>
 </header>
