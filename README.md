@@ -9,7 +9,9 @@
 ![Tela de Login](./assets/img/screenshots/tela-de-login.png)
 
 ### Caso o email ou a senha estejam incorretos
-- Use "admin@admin" e "admin" respectivamente como email e senha padrão.
+- Crie um banco de dados chamado "sistema" pelo phpmyadmin.
+- Importe o arquivo `sistema.sql` (confira a pasta **db/**) no banco "sistema".
+- Use "admin" e "admin" respectivamente como usuário e senha padrão.
 &nbsp;
 
 ![Erro no Login](./assets/img/screenshots/erro-login.png)
