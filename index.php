@@ -1,8 +1,7 @@
 <?php 
     session_start();
 
-    if(($_SESSION['login']))
-    {
+    if (isset($_SESSION['login'])) {
         header("Location: pages/menu.php");
         exit;
     }
@@ -12,31 +11,35 @@
         unset($_SESSION['erro']);
     }
 
-    if (!empty($_POST))
-    {
+    if (!empty($_POST)) {
         $usuario = $_POST['usuario'];
         $senha = $_POST['senha'];
 
         include_once('config/conexao.php');
 
-        $rs = $conn->query("SELECT * FROM usuario where nm_usuario='$usuario' and senha='$senha'");
+        try {
+            // Usando prepared statement
+            $stmt = $conn->prepare("SELECT * FROM usuario WHERE nm_usuario = :usuario");
+            $stmt->bindParam(':usuario', $usuario);
+            $stmt->execute();
 
-        $rs -> execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if($rs->fetch(PDO::FETCH_ASSOC) == true)
-        {
-            $_SESSION['login'] = $usuario;
-            header('Location:pages/menu.php');
+            if ($user && password_verify($senha, $user['senha'])) {
+                $_SESSION['login'] = $usuario;
+                header('Location: pages/menu.php');
+                exit;
+            } else {
+                echo "<script>alert('Nome de usuário ou senha incorretos');</script>";
+            }
+        } catch (PDOException $e) {
+            echo "Erro na consulta: " . $e->getMessage();
         }
-        else{
-            echo "
-                <script>
-                    alert('Nome de usuário ou senha incorretos');
-                </script>
-            ";
-        }
+
+        $conn = null;
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

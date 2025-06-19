@@ -12,7 +12,7 @@ try {
     $sql = "create table usuario(codigo int PRIMARY KEY AUTO_INCREMENT,
             imagem varchar(255) not null, 
             nm_usuario varchar(50) not null,
-            senha varchar(20) not null,
+            senha varchar(255) not null,
             funcionario varchar(100) not null)";
 
     $conn->exec($sql);

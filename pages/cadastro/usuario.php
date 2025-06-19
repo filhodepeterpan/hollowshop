@@ -59,7 +59,7 @@
 if(!empty($_POST))
 {
 	$usuario = $_POST['usuario'];
-	$senha = $_POST['senha'];
+	$senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
 	$funcionario = $_POST['funcionario'];
 
     $imagem = $_FILES['img'];
