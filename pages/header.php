@@ -1,8 +1,12 @@
 <?php
     require_once(__DIR__ . '/urlconfig.php');
+
+    date_default_timezone_set('America/Sao_Paulo');
 ?>
 
 <header class="cabecalho">
+    <?php date_default_timezone_set('America/Sao_Paulo'); ?>
+    
     <div class="logo">
         <h1 id="hollowshop-menu" onclick="window.location.href='<?= BASE_URL ?>pages/menu.php'">HOLLOWSHOP</h1>
     </div>

@@ -1,9 +1,7 @@
 <?php
 $servername = "localhost";
-// $servername = "localhost:3308";
 $username = "root";
 $password = "";
-// $password = "twubc@94";
 $dbname = "sistema";
 
 try {
@@ -22,7 +20,8 @@ try {
             numero varchar(10) not null,
             celular varchar(20) not null,
             cidade varchar(20) not null,
-            email varchar(40) not null)";
+            email varchar(40) not null,
+            imagem varchar(255) not null)";
 
     $conn->exec($sql);
     

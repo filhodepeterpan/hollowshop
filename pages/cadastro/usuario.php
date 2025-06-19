@@ -13,7 +13,7 @@
 
     <div class="formulario">
         
-        <form id="formulario-cadastro" action="#" method="POST">
+        <form id="formulario-cadastro" action="#" method="POST" enctype="multipart/form-data">
 
             <h1 id="formulario-titulo">Cadastro de Usuário</h1>
 
@@ -37,6 +37,10 @@
             <input required type="text" name="funcionario" id="funcionario">
             <br>
 
+            <label class="form-label">Foto:</label>
+            <br>
+			<input type="file" accept="image/jpeg, image/png, image/gif, image/jpg, image/webp" class="form-control" name="img">
+
             <div class="formulario-botoes">
                 <button type="submit" id="botaoCadastro">Cadastrar</button>
                 <button type="button" id="botaoLimpar" onclick="limpaFormulario()">Limpar</button>
@@ -58,30 +62,27 @@ if(!empty($_POST))
 	$senha = $_POST['senha'];
 	$funcionario = $_POST['funcionario'];
 
+    $imagem = $_FILES['img'];
+    $dir = "img/usuario/";
+    $extensao = strtolower(substr($imagem['name'], -4));
+    $novo_nome = date("Y.m.d-H.i.s") . $extensao;
+
+    move_uploaded_file($imagem['tmp_name'], $dir.$novo_nome);
+
+    $caminhoIMG = $dir.$novo_nome;
+
 	include_once('../../config/conexao.php');
 
 	try {
-/*
-		
-    $ext = strtolower(substr($_FILES['pic']['name'],-4)); //Pegando extensão do arquivo
-    $new_name = date("Y.m.d-H.i.s") . $ext; //Definindo um novo nome para o arquivo
-    $dir = 'img/cliente/'; //Diretório para uploads
- 
-    move_uploaded_file($_FILES['pic']['tmp_name'], $dir.$new_name); //Fazer upload do arquivo
-
-    $enderecoImagem = $dir.$new_name;
-*/	  
 	  
-	  $stmt = $conn->prepare("INSERT INTO usuario (nm_usuario, senha, funcionario) VALUES (:nm_usuario, :senha, :funcionario)");
+	  $stmt = $conn->prepare("INSERT INTO usuario (nm_usuario, senha, funcionario, imagem) VALUES (:nm_usuario, :senha, :funcionario, :imagem)");
 
 	  $stmt->bindParam(':nm_usuario', $usuario);
 	  $stmt->bindParam(':senha', $senha);
 	  $stmt->bindParam(':funcionario', $funcionario);
-	  //$stmt->bindParam(':imagem', $enderecoImagem);
+	  $stmt->bindParam(':imagem', $caminhoIMG);
 	  
 	  $stmt->execute();
-
-	  
 
 	  echo "<script>alert('Cadastrado com Sucesso');</script>";
 

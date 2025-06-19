@@ -1,9 +1,7 @@
 <?php
 $servername = "localhost";
-// $servername = "localhost:3308";
 $username = "root";
 $password = "";
-// $password = "twubc@94";
 $dbname = "sistema";
 
 try {
@@ -11,7 +9,8 @@ try {
 
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = "create table usuario(codigo int PRIMARY KEY AUTO_INCREMENT, 
+    $sql = "create table usuario(codigo int PRIMARY KEY AUTO_INCREMENT,
+            imagem varchar(255) not null, 
             nm_usuario varchar(50) not null,
             senha varchar(20) not null,
             funcionario varchar(100) not null)";

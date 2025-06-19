@@ -28,7 +28,7 @@
 
       while($row = $select->fetch()){
           echo "<p>";
-          // echo "<br>"<img src=' ".$row['imagem']. " ' width=80px>";
+          echo "<img src='../cadastro/".$row['imagem']."' width='150px' style='border-radius: 20px; margin: 1rem 0;'";
           echo "<br><b>Código: </b>" . $row['codigo'];
           echo "<br><b>Código do Produto: </b>" . $row['codigoProduto'];
           echo "<br><b>Produto: </b>" . $row['produto'];

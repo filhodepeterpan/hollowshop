@@ -1,9 +1,7 @@
 <?php
 $servername = "localhost";
-// $servername = "localhost:3308";
 $username = "root";
 $password = "";
-// $password = "twubc@94";
 $dbname = "sistema";
 
 try {
@@ -12,6 +10,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = "create table produto(codigo int PRIMARY KEY AUTO_INCREMENT,
+            imagem varchar(255) not null,
             codigoProduto varchar(50) not null,
             produto varchar(100) not null,
             categoria varchar(30) not null,

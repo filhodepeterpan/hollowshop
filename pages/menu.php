@@ -26,9 +26,9 @@ if(empty($_SESSION['login']))
         <div class="menu-conteudo-esquerdo">
             <h1>Cadastre os NPCS e itens de sua preferência no mundo de Hollow Knight!</h1>
             <br>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam iste nostrum, consectetur doloremque soluta veritatis aliquid perspiciatis sed, nam hic porro ducimus! Libero culpa tempore nostrum cupiditate sed laborum aspernatur.
-            Voluptatum placeat inventore quos enim quia veniam mollitia laudantium laboriosam fuga temporibus pariatur accusantium corporis doloribus incidunt, eveniet illo recusandae necessitatibus, veritatis delectus? Delectus aut laboriosam, impedit eos quas reiciendis!
-            Eligendi ducimus necessitatibus dolorem quis, magni officiis hic ut quos fuga numquam rem asperiores sequi delectus! Nesciunt consequatur molestiae deserunt ex eligendi cumque veniam ut, unde aspernatur ea ducimus? Quae!</p>
+            <p>Explore Hallownest como nunca antes! Aqui, você pode registrar seus NPCs favoritos, organizar seus itens mais valiosos e criar sua própria coleção personalizada dentro do mundo de Hollow Knight.<br><br>
+            Seja você um Cavaleiro em busca de ordem ou apenas um admirador das histórias escondidas sob a terra, nossa loja foi feita para reunir tudo o que você mais ama nesse universo misterioso e encantador.<br><br>
+            Prepare seu mapa, escolha seus companheiros de jornada e mergulhe nas profundezas — Hallownest espera por você.</p>
         </div>
 
         <div class="menu-conteudo-direito">

@@ -13,7 +13,7 @@
 
     <div class="formulario">
         
-        <form id="formulario-cadastro" action="#" method="POST">
+        <form id="formulario-cadastro" action="#" method="POST" enctype="multipart/form-data">
 
             <h1 id="formulario-titulo">Cadastro de Funcionário</h1>
 
@@ -78,6 +78,10 @@
             <input required type="date" name="data-admissao" id="data-admissao">
             <br>
 
+            <label class="form-label">Foto:</label>
+            <br>
+			<input type="file" accept="image/jpeg, image/png, image/gif, image/jpg, image/webp" class="form-control" name="img">
+
             <div class="formulario-botoes">
                 <button type="submit" id="botaoCadastro">Cadastrar</button>
                 <button type="button" id="botaoLimpar" onclick="limpaFormulario()">Limpar</button>
@@ -107,21 +111,21 @@
      $celular = $_POST['cel'];
      $email = $_POST['email'];
      $dataAdmissao = $_POST['data-admissao'];
+
+    $imagem = $_FILES['img'];
+    $dir = "img/funcionario/";
+    $extensao = strtolower(substr($imagem['name'], -4));
+    $novo_nome = date("Y.m.d-H.i.s") . $extensao;
+
+    move_uploaded_file($imagem['tmp_name'], $dir.$novo_nome);
+
+    $caminhoIMG = $dir.$novo_nome;
  
      include_once('../../config/conexao.php');
  
-     try {
- /*
-         $ext = strtolower(substr($_FILES['pic']['name'],-4)); //Pegando extensão do arquivo
-     $new_name = date("Y.m.d-H.i.s") . $ext; //Definindo um novo nome para o arquivo
-     $dir = 'img/cliente/'; //Diretório para uploads
-  
-     move_uploaded_file($_FILES['pic']['tmp_name'], $dir.$new_name); //Fazer upload do arquivo
- 
-     $enderecoImagem = $dir.$new_name;
- */	  
+     try {  
        
-       $stmt = $conn->prepare("INSERT INTO funcionario (nome,cpf,rg,cep,numero,celular,email, dataAdmissao,uf,rua,bairro,cidade) VALUES (:nome,:cpf,:rg,:cep,:numero,:celular,:email,:dataAdmissao,:uf,:rua,:bairro,:cidade)");
+       $stmt = $conn->prepare("INSERT INTO funcionario (nome,cpf,rg,cep,numero,celular,email, dataAdmissao,uf,rua,bairro,cidade,imagem) VALUES (:nome,:cpf,:rg,:cep,:numero,:celular,:email,:dataAdmissao,:uf,:rua,:bairro,:cidade,:imagem)");
  
        $stmt->bindParam(':nome', $nome);
        $stmt->bindParam(':cpf', $cpf);
@@ -135,7 +139,7 @@
        $stmt->bindParam(':rua', $rua);
        $stmt->bindParam(':bairro', $bairro);
        $stmt->bindParam(':cidade', $cidade);
-       //$stmt->bindParam(':imagem', $enderecoImagem);
+       $stmt->bindParam(':imagem', $caminhoIMG);
        
        $stmt->execute();
  
